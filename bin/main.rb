@@ -1,6 +1,16 @@
 puts "Welcome to Pascal and Hillary's tic-tac-toe game"
 
-puts 'Enter name'
+puts 'Enter first player name'
+player_names = Array.new(2)
+invalid = true
+while invalid
+  # get the player names and add them to player_names array
+  puts "Enter player #{i + 1} name"
+  player_names[i] = gets.chomp
+end
+
+
+
 
 puts 'TIC TAC TOE'
 
