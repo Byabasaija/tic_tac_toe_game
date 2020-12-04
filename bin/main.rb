@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 puts "Welcome to Pascal and Hillary's tic-tac-toe game"
 
 puts 'Enter first player name'
@@ -39,6 +40,8 @@ while game_on
     puts 'Your turn'
   end
 
+  puts 'Place your token (X or O) on positions 1-9 on the board'
+
   puts <<-BOARD
     |X|O|X|
     |X|O|X|
@@ -58,6 +61,6 @@ while game_on
     puts 'You won'
     game_on = false
   else
-    puts 'You Drew'
+    puts "It's a draw"
   end
 end
