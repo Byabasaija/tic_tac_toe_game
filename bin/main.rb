@@ -4,11 +4,11 @@ puts 'Enter first player name'
 player_names = Array.new(2)
 invalid = true
 while invalid
-    (0..1).each do |i|
-     puts "Enter player #{i+1} name" 
-     player_names[i] = gets.chomp
-    end
-    invalid = false
+  (0..1).each do |i|
+    puts "Enter player #{i + 1} name"
+    player_names[i] = gets.chomp
+  end
+  invalid = false
 end
 puts 'TIC TAC TOE'
 
@@ -25,30 +25,39 @@ def display_board(board)
 end
 display_board(board)
 
-puts "Please enter your token (X or O)"
+game_on = true
+
+puts 'Please enter your token (X or O)'
 token = gets.chomp!
-if token == "X"
-    board<<token.to_i
-    puts "The other players turn "
-else token == "O"
-    board<<token.to_i
-    puts "Your turn"
-end
-board_played = ['X', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'X']
-def display_board(board_played)
-    puts " #{board_played[0]} | #{board_played[1]} | #{board_played[2]} "
-    puts '-----------'
-    puts " #{board_played[3]} | #{board_played[4]} | #{board_played[5]} "
-    puts '-----------'
-    puts " #{board_played[6]} | #{board_played[7]} | #{board_played[8]} "
+
+while game_on
+
+  board << token.to_i
+  if token == 'X'
+    puts 'The other players turn '
+  else
+    puts 'Your turn'
   end
-display_board(board_played)
-if board<<token.to_i && token.to_i
-    #Invalid move
-    else
-        #play on
-    end
 
+  puts <<-BOARD
+    |X|O|X|
+    |X|O|X|
+    |X|O|X|
+  BOARD
 
-puts 'You won'
-puts 'You Drew'
+  if board << token.to_i == 'X' || board << token.to_i == 'O'
+    puts 'Invalid move'
+  else
+    # play on
+    puts 'Valid move'
+  end
+
+  winner = true
+  # player tokens are alligned in the entire row or column
+  if winner
+    puts 'You won'
+    game_on = false
+  else
+    puts 'You Drew'
+  end
+end
