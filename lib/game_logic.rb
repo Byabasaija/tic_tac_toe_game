@@ -42,14 +42,17 @@ class GameLogic
        !position_taken?(input_to_index) && @board[input_to_index]
      end
      
-     def turn_count
+     def turn
        count = 0 
        @board.each do |input|
          count +=1 if input == 'X' || input == 'O'
        end
        count
      end
-     def current_player
-       turn_count % 2 == 0 ? "x" : "O"
+     def current_player(board)
+       if turn(board) % 2 == 0 
+        "X" = true
+       else 
+        "O" = true
      end
 end
