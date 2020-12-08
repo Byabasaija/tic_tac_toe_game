@@ -11,11 +11,11 @@ class GameLogic
         ]
 
     def initialize
-        @board = Array.new(9, " ")
+      @board = Array.new(9, " ")
     end
 
     def input_to_index(token)
-      @choice = token.to_i-1
+      @choice = token.to_i - 1
     end
 
     def move(input_to_index,token)
@@ -37,15 +37,16 @@ class GameLogic
     def turn
       count = 0 
       @board.each do |input|
-        count +=1 if input == 'X' || input == 'O'
+        count += 1 if input == 'X' || input == 'O'
       end
       count
     end
 
-    def current_player(board)
-      if turn(board) % 2 == 0 
-      "X" = true
+    def current_player(turn)
+      if turn.even?
+        return "X"
       else 
-      "O" = true
+        return "O"
+      end
     end
 end
