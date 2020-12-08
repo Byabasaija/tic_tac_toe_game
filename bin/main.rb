@@ -55,11 +55,11 @@ class UserInterface
 
   def display_board(board)
 
-    puts " #{@board[0][0]} | #{@board[0][1]} | #{@board[1][2]} "
+    puts " #{@board[0]} | #{@board[1]} | #{@board[2]} "
     puts '-----------'
-    puts " #{@board[1][0]} | #{@board[1][1]} | #{@board[1][2]} "
+    puts " #{@board[3]} | #{@board[4]} | #{@board[5]} "
     puts '-----------'
-    puts " #{@board[2][0]} | #{@board[2][1]} | #{@board[2][2]} "    
+    puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "    
   end
 
   def game
@@ -75,11 +75,11 @@ class UserInterface
       if exp.include?(input)
         puts game_logic.current_player(i)
         @board[input.to_i-1] = game_logic.current_player(i)
-        puts @board.inspect, @board[input.to_i-1].class, game_logic.current_player(i)
-        i += 1
+        display_board(@board)
       else
         puts "Enter Valid Input"
       end
+      
     end
   end
 
