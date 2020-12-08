@@ -1,8 +1,13 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/game_logic.rb'
+require_relative '../lib/play.rb'
 
 class UserInterface
+
+  def initialize
+    @board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+  end
 
   def welcome
     puts 'TIC TAC TOE'
@@ -10,6 +15,7 @@ class UserInterface
   end
 
   def names_of_players
+
     player_names = Array.new(2)
     invalid = true
     while invalid
@@ -36,7 +42,7 @@ class UserInterface
     puts ("#{player[0]} symbol is X and #{player[1]} symbol is O")
   end
 
-  def board
+  def show_board
     puts 'play by entering X or O on the board by selecting 1-9'
     puts <<-BOARD
       1 | 2 | 3 |
@@ -47,25 +53,33 @@ class UserInterface
       BOARD
   end
 
+  def display_board(board)
 
-  def display_board
-    puts 'play by entering X or O on the board'
-
-    board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-
-    puts " #{board[0]} | #{board[1]} | #{board[2]} "
+    puts " #{@board[0][0]} | #{@board[0][1]} | #{@board[1][2]} "
     puts '-----------'
-    puts " #{board[3]} | #{board[4]} | #{board[5]} "
+    puts " #{@board[1][0]} | #{@board[1][1]} | #{@board[1][2]} "
     puts '-----------'
-    puts " #{board[6]} | #{board[7]} | #{board[8]} "
+    puts " #{@board[2][0]} | #{@board[2][1]} | #{@board[2][2]} "    
   end
 
-  def game(players)
-    @game = GameLogic.new
+  def game
+    game_logic = GameLogic.new
 
     game_on = true
+    i = 0
+    exp = '123456789'.split('')
     while game_on
-      
+
+      input = gets.chomp
+
+      if exp.include?(input)
+        puts game_logic.current_player(i)
+        @board[input.to_i-1] = game_logic.current_player(i)
+        puts @board.inspect, @board[input.to_i-1].class, game_logic.current_player(i)
+        i += 1
+      else
+        puts "Enter Valid Input"
+      end
     end
   end
 
@@ -74,9 +88,9 @@ user_interface = UserInterface.new
 user_interface.welcome
 player = user_interface.names_of_players
 user_interface.player_symbols(player)
-user_interface.board
-board = user_interface.display_board
-
+user_interface.show_board
+user_interface.game
+show = user_interface.display_board
 
 
 # game_on = true
