@@ -30,7 +30,7 @@ class UserInterface
         puts "Player names can't be the same"
         invalid = true
 
-      elsif ('0123456789').include?(player_names[0]) || ('0123456789').include?(player_names[1])
+      elsif '0123456789'.include?(player_names[0]) || '0123456789'.include?(player_names[1])
         puts 'Enter a valid name'
         invalid = true
 
