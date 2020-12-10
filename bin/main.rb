@@ -85,7 +85,7 @@ class UserInterface
         display_board(@game_logic.board)
         puts 'Position Taken'
       elsif @game_logic.full?
-        puts "It's a draw"
+        abort("It's a draw")
       else
         puts 'Enter Valid Input'
       end

@@ -14,8 +14,6 @@ class GameLogic
 
   def initialize
     @board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-    # input = gets.chomp
-    # input = input_to_input(input)
   end
 
   def input_to_index(input)
