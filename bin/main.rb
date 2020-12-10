@@ -2,7 +2,6 @@
 # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 require_relative '../lib/game_logic'
 require_relative '../lib/play'
-
 class UserInterface
   def initialize
     @game_logic = GameLogic.new
