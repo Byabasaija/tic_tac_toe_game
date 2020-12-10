@@ -120,4 +120,3 @@ user_interface = UserInterface.new
 user_interface.welcome
 
 # rubocop:enable Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/BlockNesting
-
