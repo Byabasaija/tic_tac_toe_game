@@ -72,6 +72,16 @@ class UserInterface
       if @game_logic.valid_move?(input)
         @game_logic.move(input, i) && @game_logic.position_taken?(input)
         display_board(@game_logic.board)
+        if @game_logic.turn.even?
+          puts("#{@player[0]}'s turn")
+        else
+          puts("#{@player[1]}'s turn")
+        end
+        if @game_logic.turn == 9
+          abort("It's a draw")
+        else
+          game_on
+        end
         case @game_logic.won(@game_logic.board)
         when 1
           abort("#{@player[0]} wins!")
@@ -82,7 +92,7 @@ class UserInterface
       elsif exp.include?(input) && @game_logic.turn < 8
         @game_logic.position_taken?(input)
         display_board(@game_logic.board)
-        puts 'Position Taken'
+        puts 'Position Taken Try Again'
       elsif @game_logic.full?
         abort("It's a draw")
       else
