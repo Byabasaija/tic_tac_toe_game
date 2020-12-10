@@ -88,7 +88,6 @@ class UserInterface
       else
         puts 'Enter Valid Input'
       end
-
     end
   end
 end
