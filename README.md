@@ -20,6 +20,7 @@ The game board is, as shown above, a 3x3 grid where each player takes a turn and
 4) or if the symbol occupies the antidiagonal.
 
  The first player to fulfill any of the above conditions is declared **Winner!**
+ 
 ![screenshot](assets/winning.PNG)
 
 ##### Draw
