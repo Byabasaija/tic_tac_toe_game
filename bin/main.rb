@@ -20,6 +20,7 @@ class UserInterface
   def names_of_players
     player_names = Array.new(2)
     invalid = true
+    num = '0123456789'.split('')
     while invalid
       (0..1).each do |i|
         puts "Enter player #{i + 1} name"
@@ -28,6 +29,10 @@ class UserInterface
 
       if player_names[0] == player_names[1]
         puts "Player names can't be the same"
+        invalid = true
+        
+      elsif ('0123456789').include?(player_names[0]) || ('0123456789').include?(player_names[1]) || player_names[0].include?(' ') || player_names[1].include?(' ')
+        puts 'Enter a valid name'
         invalid = true
 
       elsif player_names[0].empty? || player_names[1].empty?
@@ -62,31 +67,37 @@ class UserInterface
     puts '-----------'
     puts " #{board[6]} | #{board[7]} | #{board[8]} "
   end
-
+  
   def game
     game_on = true
     i = 0
     exp = '123456789'.split('')
     while game_on
+      if @game_logic.turn == 0
+       puts ("#{@player[0]} starts the game")
+      end
       input = gets.chomp
       if @game_logic.valid_move?(input)
         @game_logic.move(input, i) && @game_logic.position_taken?(input)
         display_board(@game_logic.board)
-        if @game_logic.turn.even?
-          puts("#{@player[0]}'s turn")
-        else
-          puts("#{@player[1]}'s turn")
-        end
+          if @game_logic.won(@game_logic.board) == 1 ||@game_logic.won(@game_logic.board) == 2
+            case @game_logic.won(@game_logic.board)
+            when 1
+              abort("#{@player[0]} wins!")
+            when 2
+              abort("#{@player[1]} wins!")
+            end
+          elsif
+            if @game_logic.turn.even?
+              puts("#{@player[0]}'s turn")
+            else
+            puts("#{@player[1]}'s turn")
+            end
+          end
         if @game_logic.turn == 9
           abort("It's a draw")
         else
           game_on
-        end
-        case @game_logic.won(@game_logic.board)
-        when 1
-          abort("#{@player[0]} wins!")
-        when 2
-          abort("#{@player[1]} wins!")
         end
         i += 1
       elsif exp.include?(input) && @game_logic.turn < 8
