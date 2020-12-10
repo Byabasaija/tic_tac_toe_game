@@ -89,13 +89,11 @@ class UserInterface
           when 2
             abort("#{@player[1]} wins!")
           end
-
         elsif @game_logic.turn.even?
           puts("#{@player[0]}'s turn")
         else
           puts("#{@player[1]}'s turn")
         end
-
         if @game_logic.turn == 9
           abort("It's a draw")
         else
