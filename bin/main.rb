@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
-
-require_relative '../lib/game_logic.rb'
-require_relative '../lib/play.rb'
+# rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+require_relative '../lib/game_logic'
+require_relative '../lib/play'
 
 class UserInterface
   def initialize
@@ -11,8 +11,8 @@ class UserInterface
   def welcome
     puts 'TIC TAC TOE'
     puts "Welcome to Pascal's and Hillary's tic-tac-toe game"
-    player = names_of_players
-    player_symbols(player)
+    @player = names_of_players
+    player_symbols(@player)
     show_board
     game
     display_board(@board)
@@ -42,7 +42,7 @@ class UserInterface
   end
 
   def player_symbols(player)
-    puts ("#{player[0]} symbol is X and #{player[1]} symbol is O")
+    puts("#{player[0]} symbol is X and #{player[1]} symbol is O")
   end
 
   def show_board
@@ -69,39 +69,31 @@ class UserInterface
     i = 0
     exp = '123456789'.split('')
     while game_on
-
       input = gets.chomp
-      # index = @game_logic.input_to_index(input)
-
-      if exp.include?(input)
-        puts @game_logic.current_player(i)
-        # @board [@game_logic.input_to_index(input)] = @game_logic.current_player(i)
-        
-        display_board(@game_logic.board)
-        i += 1
-      else
-        puts "Enter Valid Input"
-      end
-
       if @game_logic.valid_move?(input)
-        @game_logic.move(input, i)
+        @game_logic.move(input, i) && @game_logic.position_taken?(input)
+        display_board(@game_logic.board)
+        case @game_logic.won(@game_logic.board)
+        when 1
+          abort("#{@player[0]} wins!")
+        when 2
+          abort("#{@player[1]} wins!")
+        end
+        i += 1
+      elsif exp.include?(input) && @game_logic.turn < 8
+        @game_logic.position_taken?(input)
+        display_board(@game_logic.board)
+        puts 'Position Taken'
+      elsif @game_logic.full?
+        puts "It's a draw"
       else
-        puts "position taken"
+        puts 'Enter Valid Input'
       end
-
-      # valid = @game_logic.position_taken?(input)
-
-      # if valid = @game_logic.current_player(i)
-      #   @board[input.to_i-1] = @game_logic.current_player(i)
-      # else
-      #   puts 'position taken'
-      # end
-
-      # @game_logic.valid_move?(input.to_i)
-      # return 'Position taken' unless @game_logic.position_taken?(input)
 
     end
   end
 end
 user_interface = UserInterface.new
 user_interface.welcome
+
+# rubocop:enable Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
