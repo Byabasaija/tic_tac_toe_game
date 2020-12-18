@@ -13,7 +13,7 @@ describe GameLogic do
     it 'Check if a number between 1 and 9 is valid input' do
       expect(game_logic.valid_move?('1')).to eql(true)
     end
-    
+
     it 'Check if a number greater than 9 is valid input' do
       expect(game_logic.valid_move?('10')).to eql(false)
     end
@@ -55,7 +55,7 @@ describe GameLogic do
 
   describe '#move' do
     it 'takes a move for players' do
-      expect(game_logic.move(1, 0)).not_to eq(false) 
+      expect(game_logic.move(1, 0)).not_to eq(false)
     end
   end
 end
